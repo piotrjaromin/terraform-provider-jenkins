@@ -4,7 +4,7 @@ import (
 	"github.com/hashicorp/terraform/plugin"
 	"github.com/hashicorp/terraform/terraform"
 
-	"github.com/piotrjaromin/jenkins-terraform-provider/pkg"
+	. "github.com/piotrjaromin/terraform-provider-jenkins/pkg"
 )
 
 func main() {

@@ -22,11 +22,11 @@ provider "jenkins" {
 ## Supported resources
 
 * [credentials](#credentials)
-  * [#jenkins_username_credential]
-  * [#jenkins_ssh_credential]
-  * [#docker credentials]
-* [Plugins](#plugin)
-* [Job](#job)
+  * [username_credential](#jenkins_username_credential)
+  * [ssh_credential](#jenkins_ssh_credential)
+  * [credentials](#jenkins_docker_credential)
+* [plugin](#plugin)
+* [job](#job)
 
 ---
 

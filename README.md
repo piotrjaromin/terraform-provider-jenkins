@@ -21,16 +21,16 @@ provider "jenkins" {
 
 ## Supported resources
 
-* (#credentials credentials)
-  * (#jenkins_username_credential)
-  * (#jenkins_ssh_credential)
-  * (#docker credentials)
-* (#Plugins plugin)
-* (#Job job)
+* [credentials](#credentials)
+  * [#jenkins_username_credential]
+  * [#jenkins_ssh_credential]
+  * [#docker credentials]
+* [Plugins](#plugin)
+* [Job](#job)
 
 ---
 
-### [credentials](#credentials)
+### credentials
 
 Common fields for all credentials:
 
@@ -40,7 +40,7 @@ Common fields for all credentials:
 `domain` [optional] - domain for credential in jenkins ( defaults to `_` ).
 `description` [optional] - describes what credential is used for.
 
-### [jenkins_username_credential](#jenkins_username_credential)
+### jenkins_username_credential
 
 ```hcl
 resource "jenkins_username_credential" "admin" {
@@ -54,7 +54,7 @@ This will create username credential.
 
 `password` [required] - password for given user.
 
-### [jenkins_ssh_credential](#jenkins_ssh_credential)
+### jenkins_ssh_credential
 
 ```hcl
 resource "jenkins_ssh_credential" "ssh_user" {
@@ -72,7 +72,7 @@ resource "jenkins_ssh_credential" "ssh_user" {
 
 This will create ssh credential, ssh key can be provided as inline value or as path on jenkins master.
 
-### [jenkins_docker_credential](#jenkins_docker_credential)
+### jenkins_docker_credential
 
 ```hcl
 resource "jenkins_docker_credential" "docker_user" {
@@ -90,7 +90,7 @@ This will create docker credential.
 `client_key` [optional] - client key value.
 
 
-## [plugins](#plugins)
+## plugin
 
 ```hcl
 "jenkins_plugin" "packer" {
@@ -103,7 +103,7 @@ Will try to install plugin with given name and version
 `name` [required] - id of plugin to install.
 `version` [required] - version of plugin to install
 
-## [job](#job)
+## job
 
 ```hcl
 "jenkins_xml_job" "job" {

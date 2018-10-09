@@ -43,6 +43,7 @@ func Provider() *schema.Provider {
 			"jenkins_job_xml":             job.XmlJob(),
 			"jenkins_plugin":              plugins.Plugin(),
 			"jenkins_username_credential": credentials.Username(),
+			"jenkins_secret_credential":   credentials.Secret(),
 			"jenkins_ssh_credential":      credentials.SSH(),
 			"jenkins_docker_credential":   credentials.Docker(),
 		},

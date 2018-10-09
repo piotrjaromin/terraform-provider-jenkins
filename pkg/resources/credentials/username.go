@@ -37,6 +37,11 @@ func Username() *schema.Resource {
 				Optional: true,
 				Default:  "_",
 			},
+			"jobpath": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+				Default:  "",
+			},
 			"description": &schema.Schema{
 				Type:     schema.TypeString,
 				Optional: true,

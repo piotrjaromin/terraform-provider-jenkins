@@ -6,11 +6,11 @@ import (
 	"github.com/piotrjaromin/terraform-provider-jenkins/pkg/resources/credentials/util"
 )
 
-type usernameProvider struct{}
+type secretProvider struct{}
 
-func Username() *schema.Resource {
+func Secret() *schema.Resource {
 
-	manager := util.CreateCredsManager(usernameProvider{})
+	manager := util.CreateCredsManager(secretProvider{})
 
 	return &schema.Resource{
 		Create: manager.ResourceServerCreate,
@@ -19,18 +19,13 @@ func Username() *schema.Resource {
 		Delete: manager.ResourceServerDelete,
 
 		Schema: map[string]*schema.Schema{
-			"username": &schema.Schema{
+			"secret": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 			},
 			"identifier": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
-			},
-			"password": &schema.Schema{
-				Type:      schema.TypeString,
-				Required:  true,
-				Sensitive: true,
 			},
 			"domain": &schema.Schema{
 				Type:     schema.TypeString,
@@ -56,17 +51,16 @@ func Username() *schema.Resource {
 	}
 }
 
-func (usernameProvider) Empty() interface{} {
+func (secretProvider) Empty() interface{} {
 	return gojenkins.UsernameCredentials{}
 }
 
-func (usernameProvider) FromResourceData(d *schema.ResourceData) (interface{}, error) {
+func (secretProvider) FromResourceData(d *schema.ResourceData) (interface{}, error) {
 
-	return gojenkins.UsernameCredentials{
+	return gojenkins.StringCredentials{
 		ID:          d.Get("identifier").(string),
 		Scope:       d.Get("scope").(string),
-		Username:    d.Get("username").(string),
-		Password:    d.Get("password").(string),
+		Secret:      d.Get("secret").(string),
 		Description: d.Get("description").(string),
 	}, nil
 }

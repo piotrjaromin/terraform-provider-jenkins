@@ -23,13 +23,13 @@ func Provider() *schema.Provider {
 			"username": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "",
+				DefaultFunc: schema.EnvDefaultFunc("JENKINS_USERNAME", ""),
 				Description: "username which should be used to loginto jenkins instance",
 			},
 			"password": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "",
+				DefaultFunc: schema.EnvDefaultFunc("JENKINS_PASSWORD", ""),
 				Description: "password which should be used to loginto jenkins instance",
 			},
 			"ca_cert": {
@@ -43,6 +43,7 @@ func Provider() *schema.Provider {
 			"jenkins_job_xml":             job.XmlJob(),
 			"jenkins_plugin":              plugins.Plugin(),
 			"jenkins_username_credential": credentials.Username(),
+			"jenkins_secret_credential":   credentials.Secret(),
 			"jenkins_ssh_credential":      credentials.SSH(),
 			"jenkins_docker_credential":   credentials.Docker(),
 		},

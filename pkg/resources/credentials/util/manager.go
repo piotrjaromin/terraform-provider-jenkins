@@ -26,13 +26,13 @@ func CreateCredsManager(provider CredsProvider) CredsManager {
 
 	create := func(d *schema.ResourceData, m interface{}) error {
 
-		cm, domain := getCMAndDomain(d, m)
+		cm, domain, jobPath := getCMAndDomain(d, m)
 		cred, err := provider.FromResourceData(d)
 		if err != nil {
 			return err
 		}
 
-		err = cm.Add(domain, cred)
+		err = cm.Add(domain, jobPath, cred)
 		if err != nil {
 			return err
 		}
@@ -44,10 +44,10 @@ func CreateCredsManager(provider CredsProvider) CredsManager {
 
 	read := func(d *schema.ResourceData, m interface{}) error {
 
-		cm, domain := getCMAndDomain(d, m)
+		cm, domain, jobPath := getCMAndDomain(d, m)
 
 		cred := provider.Empty()
-		err := cm.GetSingle(domain, d.Id(), &cred)
+		err := cm.GetSingle(domain, jobPath, d.Id(), &cred)
 		if err != nil {
 			return err
 		}
@@ -57,18 +57,18 @@ func CreateCredsManager(provider CredsProvider) CredsManager {
 	}
 
 	update := func(d *schema.ResourceData, m interface{}) error {
-		cm, domain := getCMAndDomain(d, m)
+		cm, domain, jobPath := getCMAndDomain(d, m)
 		cred, err := provider.FromResourceData(d)
 		if err != nil {
 			return err
 		}
 
-		return cm.Update(domain, id(cred), cred)
+		return cm.Update(domain, jobPath, id(cred), cred)
 	}
 
 	delete := func(d *schema.ResourceData, m interface{}) error {
-		cm, domain := getCMAndDomain(d, m)
-		return cm.Delete(domain, d.Get("id").(string))
+		cm, domain, jobPath := getCMAndDomain(d, m)
+		return cm.Delete(domain, jobPath, d.Id())
 	}
 
 	return CredsManager{
